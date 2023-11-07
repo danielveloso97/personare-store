@@ -6,6 +6,7 @@ import { RegisterCategory } from './use-cases/categories/register-category';
 import { CategoryProvider } from './database/category.repository';
 import { ListCategory } from './use-cases/categories/list-category';
 import { GetCategory } from './use-cases/categories/get-category';
+import { DeleteCategory } from './use-cases/categories/delete-category';
 
 @Module({
   imports: [ConfigModule.forRoot(), DatabaseModule],
@@ -13,6 +14,7 @@ import { GetCategory } from './use-cases/categories/get-category';
     RegisterCategory,
     ListCategory,
     GetCategory,
+    DeleteCategory,
     { provide: CategoryProvider.name, useClass: CategoryProvider },
   ],
   controllers: [CategoryController],

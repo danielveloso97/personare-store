@@ -5,4 +5,5 @@ export interface CategoryRepository {
   create(data: CreateCategorytDto): Promise<Category>;
   find(): Promise<Category[]>;
   findOne(slug: string): Promise<Category>;
+  delete(id: string): Promise<void>;
 }

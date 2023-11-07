@@ -28,4 +28,8 @@ export class CategoryProvider implements CategoryRepository {
     const category = await this.repository.findOne({ where: { slug } });
     return category;
   }
+
+  async delete(id: string): Promise<void> {
+    await this.repository.delete(id);
+  }
 }
