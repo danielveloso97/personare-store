@@ -19,7 +19,7 @@ type RegisterCategoryInput = {
 };
 
 @ApiTags('Category')
-@Controller()
+@Controller('categories')
 export class CategoryController {
   constructor(
     private readonly registerCategory: RegisterCategory,

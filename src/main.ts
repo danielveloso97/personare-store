@@ -4,6 +4,7 @@ import { ConfigService } from '@nestjs/config';
 import { ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { CategoryModel } from './docs/model/category.model';
+import { ProductModel } from './docs/model/product.model';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -26,7 +27,7 @@ async function bootstrap() {
     .addTag('personare')
     .build();
   const document = SwaggerModule.createDocument(app, config, {
-    extraModels: [CategoryModel],
+    extraModels: [CategoryModel, ProductModel],
   });
   SwaggerModule.setup('api/docs', app, document);
   app.enableCors();

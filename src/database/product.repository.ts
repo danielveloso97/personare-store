@@ -2,6 +2,7 @@ import { Injectable, Inject } from '@nestjs/common';
 import { DataSource, Repository } from 'typeorm';
 import { Product } from '../entities/product.entity';
 import { ProductRepository } from '../repositories/product.repository';
+import { CreateProductDto } from '../dtos/create-product-dto';
 
 @Injectable()
 export class ProductProvider implements ProductRepository {
@@ -13,8 +14,8 @@ export class ProductProvider implements ProductRepository {
     this.repository = this.dataSource.getRepository(Product);
   }
 
-  async create(): Promise<Product> {
-    const product = this.repository.create();
+  async create(data: CreateProductDto): Promise<Product> {
+    const product = this.repository.create(data);
     await this.repository.save(product);
     return product;
   }

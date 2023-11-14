@@ -1,5 +1,6 @@
+import { CreateProductDto } from 'src/dtos/create-product-dto';
 import { Product } from 'src/entities/product.entity';
 
 export interface ProductRepository {
-  create(): Promise<Product>;
+  create(data: CreateProductDto): Promise<Product>;
 }

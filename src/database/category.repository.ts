@@ -3,6 +3,7 @@ import { CreateCategorytDto } from '../dtos/create-category-dto';
 import { Category } from '../entities/category.entity';
 import { CategoryRepository } from '../repositories/category.repository';
 import { DataSource, Repository } from 'typeorm';
+import { Product } from '../entities/product.entity';
 
 @Injectable()
 export class CategoryProvider implements CategoryRepository {
@@ -31,5 +32,18 @@ export class CategoryProvider implements CategoryRepository {
 
   async delete(id: string): Promise<void> {
     await this.repository.delete(id);
+  }
+
+  async findById(id: string): Promise<Category> {
+    const category = await this.repository.findOne({
+      where: { id },
+      relations: ['product'],
+    });
+    return category;
+  }
+
+  async saveProducts(products: Product[], category: Category): Promise<void> {
+    category.product = [...category?.product, ...products];
+    await this.repository.save(category);
   }
 }

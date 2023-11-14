@@ -7,6 +7,9 @@ import { CategoryProvider } from './database/category.repository';
 import { ListCategory } from './use-cases/categories/list-category';
 import { GetCategory } from './use-cases/categories/get-category';
 import { DeleteCategory } from './use-cases/categories/delete-category';
+import { ProductProvider } from './database/product.repository';
+import { RegisterProduct } from './use-cases/products/register-product';
+import { ProductController } from './controllers/product.controller';
 
 @Module({
   imports: [ConfigModule.forRoot(), DatabaseModule],
@@ -15,8 +18,10 @@ import { DeleteCategory } from './use-cases/categories/delete-category';
     ListCategory,
     GetCategory,
     DeleteCategory,
+    RegisterProduct,
     { provide: CategoryProvider.name, useClass: CategoryProvider },
+    { provide: ProductProvider.name, useClass: ProductProvider },
   ],
-  controllers: [CategoryController],
+  controllers: [CategoryController, ProductController],
 })
 export class AppModule {}
