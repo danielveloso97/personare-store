@@ -11,6 +11,7 @@ import { ProductProvider } from './database/product.repository';
 import { RegisterProduct } from './use-cases/products/register-product';
 import { ProductController } from './controllers/product.controller';
 import { ListProduct } from './use-cases/products/list-products';
+import { GetProduct } from './use-cases/products/get-products';
 
 @Module({
   imports: [ConfigModule.forRoot(), DatabaseModule],
@@ -21,6 +22,7 @@ import { ListProduct } from './use-cases/products/list-products';
     DeleteCategory,
     RegisterProduct,
     ListProduct,
+    GetProduct,
     { provide: CategoryProvider.name, useClass: CategoryProvider },
     { provide: ProductProvider.name, useClass: ProductProvider },
   ],

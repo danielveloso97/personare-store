@@ -23,4 +23,9 @@ export class ProductProvider implements ProductRepository {
   async find(): Promise<Product[]> {
     return this.repository.find();
   }
+
+  async findOne(slug: string): Promise<Product> {
+    const product = await this.repository.findOne({ where: { slug } });
+    return product;
+  }
 }
