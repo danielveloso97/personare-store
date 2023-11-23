@@ -19,4 +19,8 @@ export class ProductProvider implements ProductRepository {
     await this.repository.save(product);
     return product;
   }
+
+  async find(): Promise<Product[]> {
+    return this.repository.find();
+  }
 }
