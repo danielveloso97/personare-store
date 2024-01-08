@@ -5,4 +5,5 @@ export interface ProductRepository {
   create(data: CreateProductDto): Promise<Product>;
   find(): Promise<Product[]>;
   findOne(slug: string): Promise<Product>;
+  delete(id: string): Promise<void>;
 }

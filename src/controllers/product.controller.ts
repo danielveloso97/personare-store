@@ -1,8 +1,18 @@
-import { Body, Controller, Post, Get, Param } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Post,
+  Get,
+  Param,
+  Delete,
+  Res,
+  HttpStatus,
+} from '@nestjs/common';
 import { ApiOperation } from '@nestjs/swagger';
 import { RegisterProduct } from '../use-cases/products/register-product';
-import { ListProduct } from 'src/use-cases/products/list-products';
-import { GetProduct } from 'src/use-cases/products/get-products';
+import { ListProduct } from '../use-cases/products/list-products';
+import { GetProduct } from '../use-cases/products/get-products';
+import { DeleteProduct } from '../use-cases/products/delete-product';
 
 type RegisterProductInput = {
   name: string;
@@ -17,6 +27,7 @@ export class ProductController {
     private readonly registerProduct: RegisterProduct,
     private readonly listProducts: ListProduct,
     private readonly getProduct: GetProduct,
+    private readonly deleteProduct: DeleteProduct,
   ) {}
 
   @ApiOperation({ summary: 'Endpoint for create Product' })
@@ -36,5 +47,12 @@ export class ProductController {
   async getOneCategory(@Param('id') id: string) {
     const category = await this.getProduct.execute(id);
     return category;
+  }
+
+  @ApiOperation({ summary: 'Endpoint for delete one product' })
+  @Delete(':slug')
+  async removeProduct(@Param('slug') slug: string, @Res() res) {
+    await this.deleteProduct.execute(slug);
+    return res.status(HttpStatus.NO_CONTENT).send();
   }
 }

@@ -28,4 +28,8 @@ export class ProductProvider implements ProductRepository {
     const product = await this.repository.findOne({ where: { slug } });
     return product;
   }
+
+  async delete(id: string): Promise<void> {
+    await this.repository.delete(id);
+  }
 }
